@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareBridge</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareBridge | On-Demand Healthcare Services</title>
+    <style>
+        :root {
+            --primary: #1e88e5;  /* Light blue primary color */
+            --primary-light: #e3f2fd;  /* Very light blue */
+            --primary-dark: #0d47a1;  /* Darker blue for contrast */
+            --secondary: #ffffff;  /* White */
+            --accent: #00acc1;  /* Teal accent color */
+            --text-dark: #212121;  /* Dark gray for text */
+            --text-light: #757575;  /* Light gray for secondary text */
+            --success: #43a047;  /* Green for success messages */
+            --warning: #fb8c00;  /* Orange for warnings */
+            --danger: #e53935;  /* Red for errors */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--secondary);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--secondary);
+            color: var(--primary-dark);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 50px;
+            margin-right: 1rem;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 0.2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .auth-buttons button {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .login {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .login:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .signup {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+        
+        .signup:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(30, 136, 229, 0.8), rgba(30, 136, 229, 0.8)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--secondary);
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        .features {
+            padding: 4rem 2rem;
+            background-color: var(--secondary);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background-color: var(--secondary);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--primary-light);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .how-it-works {
+            padding: 4rem 2rem;
+            background-color: var(--primary-light);
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: var(--secondary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            right: -50px;
+            width: 100px;
+            height: 2px;
+            background-color: var(--primary);
+            opacity: 0.5;
+        }
+        
+        .testimonials {
+            padding: 4rem 2rem;
+            background-color: var(--secondary);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background-color: var(--secondary);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--primary-light);
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .rating {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .request-form {
+            padding: 4rem 2rem;
+            background-color: var(--primary-light);
+        }
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--primary-light);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .security {
+            padding: 4rem 2rem;
+            background-color: var(--primary-dark);
+            color: var(--secondary);
+        }
+        
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .security-card {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .security-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255,255,255,0.15);
+        }
+        
+        .security-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .feedback-system {
+            padding: 4rem 2rem;
+            background-color: var(--secondary);
+        }
+        
+        .feedback-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--secondary);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--primary-light);
+        }
+        
+        .rating-star, .service-star {
+            color: var(--accent);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .rating-star:hover, .service-star:hover,
+        .rating-star.active, .service-star.active {
+            color: var(--warning);
+            transform: scale(1.2);
+        }
+        
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--secondary);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--secondary);
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-icons {
+            margin-bottom: 2rem;
+        }
+        
+        .social-icons a {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-bottom: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul {
+                margin: 1rem 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .auth-buttons {
+                margin-top: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .step:not(:last-child)::after {
+                display: none;
+            }
+            
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="logo-container">
+        <div>
+            <div class="logo-text">CareBridge</div>
+            <div class="tagline">...bridging the gap between care and convenience</div>
+        </div>
+    </div>
+    <header>
+        <img src="logo 2!.png" alt="CareBridge Logo" class="logo-img" width="300">
+        <nav>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#how-it-works">Process</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#earn">Earn With Us</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+       
+    </header>
+
+    <section class="hero" style="background-image:url('ccbb.png');">
+        <h1>Bridging the Gap Between Care and Convenience</h1>
+        <h3 style="text-align: center;">Healthcare When and Where You Need It!</h3>
+        <p>Request medical services at your convenience and get professional care delivered to your home, office, or any location.</p>
+        <button class="cta-button">Request Service Now</button>
+    </section>
+
+    <section class="features" id="services"> 
+        <h2 class="section-title">Our Services</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>Doctor Visits</h3>
+                <p>Board-certified physicians available for in-person services at your preferred location.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-procedures"></i>
+                </div>
+                <h3>Nursing Care</h3>
+                <p>Skilled nursing services including wound care, injections, and post-operative care.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-prescription-bottle-alt"></i>
+                </div>
+                <h3>Medication Delivery</h3>
+                <p>Get your prescriptions delivered directly to your doorstep within hours.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Telemedication</h3>
+                <p>Virtual consultations with healthcare providers from the comfort of your home via secure video calls..</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-ambulance"></i>
+                </div>
+                <h3>Emergency Response</h3>
+                <p>Our emergency medical teams are available round-the-clock with an average response time of under 15 minutes in urban areas.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3>Tailor service to Suit Your Need?</h3>
+                <p>Personalized healthcare services designed by you to meet your unique preferences and lifestyle.</p>
+                
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <h3>Consultation and Prescription</h3>
+                <p>Get expert medical advice and e-prescription services from our licensed physicians.</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Request Service</h3>
+                <p>Fill out our simple form or use our mobile app to request healthcare services.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Match with Provider</h3>
+                <p>Our system matches you with the most appropriate healthcare provider in your area.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Receive Care</h3>
+                <p>A qualified healthcare professional arrives at your location to provide care.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Rate & Review</h3>
+                <p>After your visit, rate your experience and provide feedback to help us improve.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials" style="background-image: url(ratings.jpg);">
+        <h2 class="section-title">What Our Patients Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"The doctor arrived within 45 minutes of my request and provided excellent care for my son's high fever. So much better than waiting in an ER!"</p>
+                <p class="testimonial-author">- Sarah M.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="testimonial-text">"As someone with mobility issues, having a nurse come to my home for my weekly injections has been life-changing. Professional and compassionate service."</p>
+                <p class="testimonial-author">- Robert T.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"I used the feedback system to suggest an improvement to their app, and they actually implemented it within two weeks! Great company that listens."</p>
+                <p class="testimonial-author">- Jamal K.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="request-form">
+        <div class="auth-buttons">
+            <button class="login">Log In</button>
+            <button class="signup">Sign Up</button>
+        </div>
+        <h2 class="section-title">Request Healthcare Service</h2>
+        <form id="serviceRequestForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="service">Service Needed</label>
+                <select id="service" name="service" required>
+                    <option value="">Select a service</option>
+                    <option value="doctor-visit">doctor Visit</option>
+                    <option value="nursing-care">nursing Care</option>
+                    <option value="medication-delivery">medication Delivery</option>
+                    <option value="emergency-response">emergency response</option>
+                    <option value="consultation-and-prescriptions">consultation and prescriptions</option>
+                    <option value="a-crafted-service-to-your-need?">a crafted service to your need?</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="location">Service Location</label>
+                <input type="text" id="location" name="location" placeholder="Address or landmark" required>
+            </div>
+            <div class="form-group">
+                <label for="details">Additional Details</label>
+                <textarea id="details" name="details"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="preferred-time">Preferred Time</label>
+                <input type="datetime-local" id="preferred-time" name="preferred-time">
+            </div>
+            <button type="submit" class="submit-btn">Submit Request</button>
+        </form>
+    </section>
+
+    
+<section class="earn-income" id="earn" style="background-image: url(unity.jpg);">
+    <div class="container">
+        <h2 class="section-title">Healthcare Providers - Earn With Us</h2>
+        <div class="earn-grid">
+            <div class="earn-card">
+                <div class="earn-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3>Flexible Earnings</h3>
+                <p>Set your own schedule and earn competitive rates for the services you provide.</p>
+            </div>
+            <div class="earn-card">
+                <div class="earn-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Choose Your Hours</h3>
+                <p>Work when you want - full time, part time, or just occasional shifts.</p>
+            </div>
+            <div class="earn-card">
+                <div class="earn-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3>Build Your Practice</h3>
+                <p>Expand your patient base while we handle scheduling and payments.</p>
+            </div>
+        </div>
+        <div class="cta-box">
+            <h3>Ready to Join Our Network?</h3>
+            <p>Sign up today and start earning on your schedule</p>
+            <button class="cta-button">Apply Now</button>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Add this CSS to your existing styles */
+    .earn-income {
+        padding: 4rem 2rem;
+        background-color: #f0f8ff; /* Light blue background */
+    }
+    
+    .earn-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 2rem auto;
+    }
+    
+    .earn-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+        border-top: 4px solid var(--primary);
+    }
+    
+    .earn-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .earn-icon {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
+    
+    .cta-box {
+        max-width: 800px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background-color: var(--primary);
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+    }
+    
+    .cta-box h3 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+    
+    .cta-box .cta-button {
+        background-color: white;
+        color: var(--primary);
+        margin-top: 1rem;
+    }
+    
+    .cta-box .cta-button:hover {
+        background-color: var(--primary-light);
+    }
+</style>
+
+    <section class="security" id="security">
+        <h2 class="section-title" style="color: white;">Your Data Security Is Our Priority</h2>
+        <div class="security-grid">
+            <div class="security-card">
+                <div class="security-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>End-to-End Encryption</h3>
+                <p>All your personal and medical data is encrypted both in transit and at rest.</p>
+            </div>
+            <div class="security-card">
+                <div class="security-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Data Protection Commission Compliant</h3>
+                <p>We adhere to strict healthcare privacy regulations to protect your information.</p>
+            </div>
+            <div class="security-card">
+                <div class="security-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <h3>Secure Authentication</h3>
+                <p>Multi-factor authentication and strict access controls protect your account.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="feedback-system">
+        <div class="feedback-container">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary-dark);">Rate Your Experience</h2>
+            <form id="feedbackForm">
+                <div class="form-group"> 
+                    <label for="visit-date">Date of Visit</label>
+                    <input type="date" id="visit-date" name="visit-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="provider-name">Provider Name</label>
+                    <input type="text" id="provider-name" name="provider-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Provider Rating</label>
+                    <div style="display: flex; justify-content: space-between; max-width: 300px; margin: 0 auto;">
+                        <i class="far fa-star rating-star" data-value="1" style="font-size: 2rem;"></i>
+                        <i class="far fa-star rating-star" data-value="2" style="font-size: 2rem;"></i>
+                        <i class="far fa-star rating-star" data-value="3" style="font-size: 2rem;"></i>
+                        <i class="far fa-star rating-star" data-value="4" style="font-size: 2rem;"></i>
+                        <i class="far fa-star rating-star" data-value="5" style="font-size: 2rem;"></i>
+                    </div>
+                    <input type="hidden" id="provider-rating" name="provider-rating" value="0">
+                </div>
+                <div class="form-group">
+                    <label>Overall Service Rating</label>
+                    <div style="display: flex; justify-content: space-between; max-width: 300px; margin: 0 auto;">
+                        <i class="far fa-star service-star" data-value="1" style="font-size: 2rem;"></i>
+                        <i class="far fa-star service-star" data-value="2" style="font-size: 2rem;"></i>
+                        <i class="far fa-star service-star" data-value="3" style="font-size: 2rem;"></i>
+                        <i class="far fa-star service-star" data-value="4" style="font-size: 2rem;"></i>
+                        <i class="far fa-star service-star" data-value="5" style="font-size: 2rem;"></i>
+                    </div>
+                    <input type="hidden" id="service-rating" name="service-rating" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="feedback">Your Feedback</label>
+                    <textarea id="feedback" name="feedback" required placeholder="What did we do well? How can we improve?"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Feedback</button>
+            </form>
+        </div>
+    </section>
+
+
+<section class="app-download" id="download">
+    <div class="container">
+        <div class="app-content">
+            <div class="app-text">
+                <h2 class="section-title" style="text-align: center;">Get the CareBridge App</h2>
+                <p>Experience seamless healthcare services at your fingertips. Our app makes it easier than ever to request care or provide services.</p>
+                
+                <div class="app-features">
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Book services in seconds</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Real-time service tracking</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Secure in-app messaging</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Manage appointments & payments</span>
+                    </div>
+                </div>
+                
+                <div class="download-buttons">
+                    <a href="#" class="download-btn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
+                    </a>
+                    <a href="#" class="download-btn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+                    </a>
+                </div>
+            </div>
+            <div class="app-image">
+                <img src="https://cdn.dribbble.com/users/1787323/screenshots/6817555/attachments/1455528/____.png" alt="CareBridge Mobile App">
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    
+    .app-download {
+        padding: 4rem 2rem;
+        background-color: var(--primary-light);
+    }
+    
+    .app-content {
+        display: flex;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        gap: 3rem;
+    }
+    
+    .app-text {
+        flex: 1;
+    }
+    
+    .app-image {
+        flex: 1;
+        text-align: center;
+    }
+    
+    .app-image img {
+        max-width: 300px;
+        height: auto;
+    }
+    
+    .app-features {
+        margin: 2rem 0;
+    }
+    
+    .feature {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .feature i {
+        color: var(--primary);
+        margin-right: 1rem;
+        font-size: 1.2rem;
+    }
+    
+    .download-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .download-btn {
+        display: inline-block;
+        height: 60px;
+    }
+    
+    .download-btn img {
+        height: 100%;
+        width: auto;
+    }
+    
+    @media (max-width: 768px) {
+        .app-content {
+            flex-direction: column;
+        }
+        
+        .app-image {
+            order: -1;
+            margin-bottom: 2rem;
+        }
+        
+        .download-buttons {
+            justify-content: center;
+        }
+    }
+</style>
+
+    <footer id="contact">
+        <div class="footer-links">
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Partners</a>
+            <a href="#">Pricing</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p class="copyright">&copy; 2025 CareBridge. All rights reserved.<br>Bridging the gap between care and convenience</p>
+    </footer>
+
+    <script>
+        // Star rating functionality
+        document.querySelectorAll('.rating-star').forEach(star => {
+            star.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                document.getElementById('provider-rating').value = value;
+                
+                // Update star display
+                document.querySelectorAll('.rating-star').forEach((s, index) => {
+                    if (index < value) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('fas');
+                        s.classList.remove('active');
+                        s.classList.add('far');
+                    }
+                });
+            });
+            
+            // Hover effect
+            star.addEventListener('mouseover', function() {
+                const value = this.getAttribute('data-value');
+                document.querySelectorAll('.rating-star').forEach((s, index) => {
+                    if (index < value) {
+                        s.classList.add('hover');
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseout', function() {
+                document.querySelectorAll('.rating-star').forEach(s => {
+                    s.classList.remove('hover');
+                });
+            });
+        });
+        
+        document.querySelectorAll('.service-star').forEach(star => {
+            star.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                document.getElementById('service-rating').value = value;
+                
+                // Update star display
+                document.querySelectorAll('.service-star').forEach((s, index) => {
+                    if (index < value) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('fas');
+                        s.classList.remove('active');
+                        s.classList.add('far');
+                    }
+                });
+            });
+            
+            // Hover effect
+            star.addEventListener('mouseover', function() {
+                const value = this.getAttribute('data-value');
+                document.querySelectorAll('.service-star').forEach((s, index) => {
+                    if (index < value) {
+                        s.classList.add('hover');
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseout', function() {
+                document.querySelectorAll('.service-star').forEach(s => {
+                    s.classList.remove('hover');
+                });
+            });
+        });
+        
+        // Form submission handling
+        document.getElementById('serviceRequestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Service request submitted successfully! We will contact you shortly.');
+            this.reset();
+        });
+        
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your feedback! Your review helps us improve our services.');
+            this.reset();
+            
+            // Reset stars
+            document.querySelectorAll('.rating-star, .service-star').forEach(star => {
+                star.classList.remove('fas');
+                star.classList.remove('active');
+                star.classList.add('far');
+            });
+            document.getElementById('provider-rating').value = '0';
+            document.getElementById('service-rating').value = '0';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+</body>
+</html>
